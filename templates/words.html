@@ -1,0 +1,123 @@
+{%extends 'base.html'%}
+{%block body%}
+<script>
+
+
+    function changeType(value) { 
+        let select = document.getElementById("languages")
+        if (value == 'dictionnary') { 
+            select.innerHTML = "<option value='js' selected>Choose a language </option><option value='js'>Javascript</option><option value='python'>Python</option>"
+        } 
+        else { 
+            select.innerHTML = '<option value="js" selected>Choose a language </option><option value="js">Javascript</option><option value="python">Python</option><option value="c#">C#</option><option value="c">C</option><option value="php">PHP</option>'
+
+        }
+
+
+    }
+
+    function changeTitle(value) { 
+        let p = document.getElementById("title")
+        if (value == 'js' || value == 'python') { 
+            p.innerText = '[ Stringportant.com ]'
+        } else if (value == 'c' || value == 'c#'){ 
+            p.innerText = '{ Stringportant.com }'
+        } else if (value=='php') { 
+            p.innerText = 'array( Stringportant.com )'
+        }
+    }
+    function alertDuplicate(){ 
+        alert('When no duplicates is checked, the lenght of the array is limited to the number of words that exists in the database. If you mix "no duplicate" with a letter only selector, the length of the array is limited to the number of words that exists in the database with this particular letter.')
+    }
+
+
+</script>
+
+
+  <div class="title-box" onclick="changeType(5454)">
+    <p id="title">[ Stringportant.com ]</p>    
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class=flashes>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+    <form method='POST' class="container">
+
+        <p class="container-title">Generate <select name="arrayType" onchange='changeType(this.value)'class="select">
+            <option value="array">an array</option>
+            <option value="dictionnary">a dictionnary</option>
+        </select>  of random words</p>
+     
+        <div class="words-selector"><input name='number' id='number' type="number" value='10'/> <p>words array for</p></div>
+
+        <select onchange="changeTitle(this.value)" name='language' id='languages' class="select">
+            <option value="js" selected>Choose a language </option>
+
+            <option value="js">Javascript</option>
+            <option value="python">Python</option>
+            <option value="c#">C#</option>
+            <option value="c">C</option>
+            <option value="php">PHP
+                
+            </option>
+        </select>
+
+
+        <div class="words-container">
+            <p id="words-container">{{list}}</p>
+
+        </div>
+    
+
+        <button type="submit" onclick='loading()'class="btn">Generate</button>
+        <button type="button" onclick="copy()" id='copy-btn' class="copy-btn">Copy</button>
+        <p style="color:white">{{length}} words generated</p>
+      
+        
+        <div>
+            <input type="checkbox" name="caps"> <label style="color:white" for="caps">All caps</label>
+            <select name="letter">
+                <option>All leters</option>
+                <option value="A">Only A</option>
+                <option value="B">Only B</option>
+                <option value="C">Only C</option>
+                <option value="D">Only D</option>
+                <option value="E">Only E</option>
+                <option value="F">Only F</option>
+                <option value="G">Only G</option>
+                <option value="H">Only H</option>
+                <option value="I">Only I</option>
+                <option value="J">Only J</option>
+                <option value="K">Only K</option>
+                <option value="L">Only L</option>
+                <option value="M">Only M</option>
+                <option value="N">Only N</option>
+                <option value="O">Only O</option>
+                <option value="P">Only P</option>
+                <option value="Q">Only Q</option>
+                <option value="R">Only R</option>
+                <option value="S">Only S</option>
+                <option value="T">Only T</option>
+                <option value="U">Only U</option>
+                <option value="V">Only V</option>
+                <option value="W">Only W</option>
+                <option value="X">Only X</option>
+                <option value="Y">Only Y</option>
+                <option value="Z">Only Z</option>
+            </select>
+        <input name='duplicate' onchange="alertDuplicate()" type="checkbox"> <label  style="color:white" for="duplicate">No duplicates</label> 
+        </div>
+
+
+    </form>
+
+    
+
+{%endblock body%}

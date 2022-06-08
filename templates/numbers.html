@@ -1,0 +1,88 @@
+{%extends 'base.html'%}
+{%block body%}
+<script>
+
+    function changeTitle(value) { 
+        let p = document.getElementById("title")
+        if (value == 'js' || value == 'python') { 
+            p.innerText = '[ Stringportant.com ]'
+        } else if (value == 'c' || value == 'c#'){ 
+            p.innerText = '{ Stringportant.com }'
+        } else if (value=='php') { 
+            p.innerText = 'array( Stringportant.com )'
+        }
+
+    }
+
+
+    function alertDuplicate(){ 
+    }
+
+</script>
+
+
+  <div class="title-box">
+    <p id="title">[ Stringportant.com ]</p>    
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class=flashes>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+    <form method='POST' class="container">
+
+        <p class="container-title">Generate an array of random numbers</p>
+     
+        <div class="words-selector"><input name='number' id='number' type="number" value='10'/> <p>numbers array for</p></div>
+
+        <select onchange="changeTitle(this.value)" name='language' id='language' class="select">
+            <option value='js' selected>Choose a language </option>
+
+            <option value="js">Javascript</option>
+            <option value="python">Python</option>
+            <option value="c#">C#</option>
+            <option value="c">C</option>
+            <option value="php">PHP
+                
+            </option>
+        </select>
+
+
+        <div class="words-container">
+            <p id="words-container">{{list}}</p>
+
+        </div>
+    
+
+        <button type="submit" onclick='loading()' class="btn">Generate</button>
+        <button type="button" onclick="copy()" id='copy-btn' class="copy-btn">Copy</button>
+        <p style="color:white">{{length}} numbers generated</p>
+      
+        
+        <div>
+            <input type="radio" value='only' checked name="only"> <label style="color:white" for="caps">Only...</label>
+            <input type="radio" value='upto'  name="only"> <label style="color:white" for="caps">Up to...</label>
+
+            <select name="digit">
+                <option selected value="1">... 1 digit</option>
+                <option value="2">... 2 digits</option>
+                <option value="3">... 3 digits</option>
+                <option value="4">... 4 digits</option>
+                <option value="5">... 5 digits</option>
+                <option value="6">... 6 digits</option>
+                
+            </select>
+        </div>
+
+
+    </form>
+
+    
+
+{%endblock body%}
